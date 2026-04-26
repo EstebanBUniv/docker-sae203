@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y nginx && apt-get clean
 RUN rm /var/www/html/index.nginx-debian.html
 
 # Copie du site DebianFlix et de la vidéo dans le conteneur
-COPY src/ /var/www/html/
+RUN ln -s src/ /var/www/html/
 
 # Ouverture du port web
 EXPOSE 80
