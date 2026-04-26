@@ -1,9 +1,9 @@
-# 🎬 DebianFlix - Projet SAE 2.03
+# DebianFlix - Projet SAE 2.03
 
 Ce projet propose un service de Vidéo à la Demande (VOD) hébergé dans un conteneur Docker. 
 Il respecte la contrainte d'utiliser `debian:latest` comme image de base et de ne fournir qu'un seul service (Serveur Web Nginx).
 
-## 🚀 Comment lancer le projet ?
+## Comment lancer le projet ?
 
 **1. Construire l'image Docker :**
 Ouvrez un terminal dans ce dossier et tapez :

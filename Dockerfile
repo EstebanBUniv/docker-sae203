@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y nginx && apt-get clean
 # Suppression de la page d'accueil par défaut de Nginx
 RUN rm /var/www/html/index.nginx-debian.html
 
-# Copie de ton site DebianFlix et de la vidéo dans le conteneur
+# Copie du site DebianFlix et de la vidéo dans le conteneur
 COPY src/ /var/www/html/
 
 # Ouverture du port web
