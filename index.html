@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Soutenance SAE 2.03 - DebianFlix</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        header { background: #E50914; color: white; padding: 20px; text-align: center; border-radius: 8px; }
+        h1 { margin: 0; }
+        .section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+        .command { background: #222; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎬 Projet SAE 2.03 : DebianFlix</h1>
+        <p>Déploiement d'un service réseau de Vidéo à la Demande via Docker</p>
+    </header>
+
+    <div class="section">
+        <h2>👥 L'Équipe</h2>
+        <ul>
+            <li><strong>[Ton Prénom]</strong> : Architecture Docker & Déploiement Git</li>
+            <li><strong>[Membre 2]</strong> : [Son rôle]</li>
+            <li><strong>[Membre 3]</strong> : [Son rôle]</li>
+            <li><strong>[Membre 4]</strong> : [Son rôle]</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Objectif & Contraintes</h2>
+        <p>Nous avons choisi le sujet <strong>Vidéo à la demande</strong>. Notre projet respecte les contraintes suivantes :</p>
+        <ul>
+            <li>Utilisation de l'image de base <code>debian:latest</code>.</li>
+            <li>Un seul service réseau déployé : un serveur Web <strong>Nginx</strong>.</li>
+            <li>Aucun outil multi-conteneurs (pas de docker-compose).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Démonstration (Installation)</h2>
+        <p>Pour lancer notre service sur votre machine, exécutez les commandes suivantes :</p>
+        
+        <p>1. Construire l'image (Installation de Nginx et copie des médias) :</p>
+        <div class="command">docker build -t debianflix .</div>
+        
+        <p>2. Lancer le conteneur (Mappage du port 80 vers 8080) :</p>
+        <div class="command">docker run -d -p 8080:80 debianflix</div>
+        
+        <p>3. Accéder au service web : <strong>http://localhost:8080</strong></p>
+    </div>
+
+</body>
+</html>
