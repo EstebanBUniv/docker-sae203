@@ -1,19 +1,14 @@
-# Image de base imposée
 FROM debian:latest
 
-# Installation du serveur web
-RUN apt-get update && apt-get install -y nginx
+# On installe Nginx ET l'outil de téléchargement wget
+RUN apt-get update && apt-get install -y nginx wget
 
-# Copie des vidéos dans le bon dossier
-COPY videos/ /var/www/html/videos/
-
-# Copie du script d'automatisation
+# On copie la liste des liens et le script
+COPY liens_videos.txt /liens_videos.txt
 COPY entrypoint.sh /entrypoint.sh
 
-# On donne le droit à Linux d'exécuter le script
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 80
 
-# Au lieu de lancer Nginx direct, on lance notre générateur !
 CMD ["/entrypoint.sh"]
