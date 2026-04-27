@@ -1,17 +1,19 @@
-# Base obligatoire pour la SAE
+# Image de base imposée
 FROM debian:latest
 
-# Installation du serveur Web Nginx
-RUN apt-get update && apt-get install -y nginx && apt-get clean
+# Installation du serveur web
+RUN apt-get update && apt-get install -y nginx
 
-# Suppression de la page d'accueil par défaut de Nginx
-RUN rm /var/www/html/index.nginx-debian.html
+# Copie des vidéos dans le bon dossier
+COPY videos/ /var/www/html/videos/
 
-# Copie du site DebianFlix et de la vidéo dans le conteneur
-COPY src /var/www/html
+# Copie du script d'automatisation
+COPY entrypoint.sh /entrypoint.sh
 
-# Ouverture du port web
+# On donne le droit à Linux d'exécuter le script
+RUN chmod +x /entrypoint.sh
+
 EXPOSE 80
 
-# Lancement du service en premier plan
-CMD ["nginx", "-g", "daemon off;"]
+# Au lieu de lancer Nginx direct, on lance notre générateur !
+CMD ["/entrypoint.sh"]
