@@ -13,21 +13,21 @@ Il respecte la contrainte d'utiliser `debian:latest` comme image de base et de n
 ## Comment lancer le projet ?
 
 **1. Cloner le dépot :**
-\`\`\`bash
+```bash
 git clone https://github.com/EstebanBUniv/docker-sae203.git
 cd docker-sae203
-\`\`\`
+```
 
 **2. Construire l'image Docker :**
-\`\`\`bash
+```bash
 docker build -t debianflix .
-\`\`\`
+```
 
 **3. Lancer le conteneur :**
 *(Remplacez `8080` par votre port personnel si nécessaire)*
-\`\`\`bash
+```bash
 docker run -d -p 8080:80 --name serveur_vod debianflix
-\`\`\``
+```
 
 **4. Profiter du service :**
 Ouvrez votre navigateur web et allez sur : [http://localhost:8080](http://localhost:8080)
