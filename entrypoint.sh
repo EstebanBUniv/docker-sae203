@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Initialisation de DebianFlix..."
+echo "Initialisation de DebianFlix..."
 
 # On crée le dossier qui va accueillir les vidéos
 mkdir -p /var/www/html/videos
@@ -43,7 +43,7 @@ for video in /var/www/html/videos/*.mp4; do
     nom_fichier=$(basename "$video")
     
     echo "        <div class='video-card'>" >> $FICHIER_HTML
-    echo "            <h3>🎬 $nom_fichier</h3>" >> $FICHIER_HTML
+    echo "            <h3>$nom_fichier</h3>" >> $FICHIER_HTML
     echo "            <video controls src='videos/$nom_fichier'></video>" >> $FICHIER_HTML
     echo "        </div>" >> $FICHIER_HTML
 done
