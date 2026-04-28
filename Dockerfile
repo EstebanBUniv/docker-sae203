@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y nginx wget \
 # On copie la liste des liens et le script
 COPY liens_videos.txt /liens_videos.txt
 COPY entrypoint.sh /entrypoint.sh
+COPY style.css /var/www/html/style.css
 
 RUN chmod +x /entrypoint.sh
 
