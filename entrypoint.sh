@@ -26,5 +26,5 @@ echo "];" >> /var/www/html/videos.js
 
 echo "Données générées pour le JS."
 
-# 3. Lancement de Nginx
+echo "Site prêt ! Allumage du serveur web..."
 nginx -g "daemon off;"
