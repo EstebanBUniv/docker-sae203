@@ -40,14 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     container.innerHTML = htmlContent;
 
-    // 3. Init système likes
     initLikes();
 });
-
-
-// ======================
-// 🔥 LIKES SYSTEM
-// ======================
 
 function initLikes() {
     document.querySelectorAll('.video-card').forEach(card => {
@@ -55,19 +49,29 @@ function initLikes() {
         const countSpan = card.querySelector('.like-count');
         const btn = card.querySelector('.like-btn');
 
-        // afficher likes sauvegardés
-        countSpan.textContent = getLikes(videoName);
+        // état initial
+        let liked = false;
+        let current = getLikes(videoName);
+
+        countSpan.textContent = current;
 
         btn.addEventListener('click', () => {
-            let current = getLikes(videoName);
-            current++;
+
+            if (liked) {
+                current--;
+                liked = false;
+                btn.classList.remove("liked");
+            } else {
+                current++;
+                liked = true;
+                btn.classList.add("liked");
+            }
 
             setLikes(videoName, current);
             countSpan.textContent = current;
         });
     });
 }
-
 function getLikes(videoName) {
     return parseInt(localStorage.getItem("like_" + videoName)) || 0;
 }
