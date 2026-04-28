@@ -104,29 +104,43 @@
 		</div>
 
 		<div class="section">
+			<h2>Quelques commandes Docker utiles</h2>
+			<ul>
+				<li><div class="command"> docker info				</div> Fourni des informations sur docker et la machine utilisée</li>
+				<li><div class="command"> docker run \image\  		</div> On crée un conteneur à partir d'une image. Si nous n'avons pas l'image localement, elle est téléchargé automatiquement</li>
+				<li><div class="command"> docker stop|start \id\ 	</div> Arrêter | Lancer un conteneur</li>
+				<li><div class="command"> docker ps -a  			</div> Liste des conteneurs (-a affiche également les conteneurs arrêtés)</li>
+				<li><div class="command"> docker rm -f \id\  		</div> Forcer la suppression d un conteneur même s'il n'est pas arrêté</li>
+				<li><div class="command"> docker exec -it \id\ bash </div> Ouvrir un terminal interactive (-it) dans le conteneur</li>
+			</ul>
+			<p>Les \id\ ou \image\ correspond a l'id d'un conteneur ou au nom d'une image</p>
+		</div>
+
+		<div class="section">
 			<h2>Analyse du Dockerfile</h2>
 
 			<p>Voici le fichier utilisé pour construire notre image Docker :</p>
 
 			<div class="command">
-		FROM debian:latest
-		<br><br>
-		RUN apt-get update && apt-get install -y nginx wget \
-		<br>
-			&& rm -rf /var/lib/apt/lists/*
-		<br><br>
-		COPY liens_videos.txt /liens_videos.txt
-		<br>
-		COPY entrypoint.sh /<strong>entrypoint.sh</strong>
-		<br><br>
-		RUN chmod +x /<strong>entrypoint.sh</strong>
-		<br><br>
-		EXPOSE 80
-		<br><br>
-		CMD ["/<strong>entrypoint.sh</strong>"]
+				FROM debian:latest
+				<br><br>
+				RUN apt-get update && apt-get install -y nginx wget \
+				<br>
+					&& rm -rf /var/lib/apt/lists/*
+				<br><br>
+				COPY liens_videos.txt /liens_videos.txt
+				<br>
+				COPY entrypoint.sh /<strong>entrypoint.sh</strong>
+				<br><br>
+				RUN chmod +x /<strong>entrypoint.sh</strong>
+				<br><br>
+				EXPOSE 80
+				<br><br>
+				CMD ["/<strong>entrypoint.sh</strong>"]
 			</div>
 
 			<p><strong>Explication :</strong></p>
+
 			<ul>
 				<li><strong>Debian</strong> : système de base léger et stable</li>
 				<li><strong>Nginx</strong> : serveur web pour servir les vidéos</li>
