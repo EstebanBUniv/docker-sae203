@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </video>
 
                 <div class="like-section">
-                    <button class="like-btn">👍 Like</button>
+                    <button class="like-btn">🤍</button>
                     <span class="like-count">0</span>
                 </div>
             </div>
@@ -64,6 +64,7 @@ function initLikes() {
             } else {
                 current++;
                 liked = true;
+                btn.textContent = ❤️
                 btn.classList.add("liked");
             }
 
