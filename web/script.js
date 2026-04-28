@@ -60,11 +60,12 @@ function initLikes() {
             if (liked) {
                 current--;
                 liked = false;
+                btn.textContent = "🤍"
                 btn.classList.remove("liked");
             } else {
                 current++;
                 liked = true;
-                btn.textContent = ❤️
+                btn.textContent = "❤️"
                 btn.classList.add("liked");
             }
 
