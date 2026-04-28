@@ -24,14 +24,7 @@ cat <<EOF > $FICHIER_HTML
 <head>
     <meta charset="UTF-8">
     <title>DebianFlix</title>
-    <style>
-        body { background-color: #141414; color: white; font-family: Arial, sans-serif; text-align: center; }
-        h1 { color: #E50914; margin-top: 30px; font-size: 3em;}
-        .catalogue { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 20px; }
-        .video-card { background: #222; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
-        video { width: 400px; border-radius: 5px; outline: none; }
-        h3 { margin-bottom: 10px; font-size: 1em; color: #aaa; word-wrap: break-word; max-width: 400px;}
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>DebianFlix</h1>
