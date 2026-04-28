@@ -44,11 +44,39 @@
 		<p>Pour le projet nous avons utilisé <strong>Docker</strong>. Il fonctionne ainsi :</p>
 
 		<ul>
-			<li><strong>Création de l’image :</strong> une image Docker est créée à partir d’un fichier Dockerfile. Elle contient l’application et toutes ses dépendances.</li>
-			<li><strong>Lancement du conteneur :</strong> un conteneur est une instance de cette image, dans laquelle l’application s’exécute.</li>
-			<li><strong>Isolation :</strong> chaque conteneur fonctionne indépendamment des autres et du système principal, évitant les conflits.</li>
-			<li><strong>Portabilité :</strong> l’application peut être exécutée de la même manière sur n’importe quel environnement (ordinateur, serveur, cloud) et sur n'importe quel OS (Debian, Alpine, Mac, Windows, ...).</li>
-    	</ul>
+			<li>
+				<strong>Création de l’image :</strong> une image Docker est créée à partir d’un fichier appelé <em>Dockerfile</em>. 
+				Dans ce fichier, on décrit étape par étape comment construire l’environnement : par exemple le système de base 
+				(comme Debian ou Alpine), l’installation des dépendances, et l’ajout de notre application. 
+				Une fois construite, l’image est immuable (elle ne change plus) et peut être réutilisée autant de fois que nécessaire.
+			</li>
+			<li>
+				<strong>Lancement du conteneur :</strong> un conteneur est une instance d’une image Docker en cours d’exécution. 
+				On peut voir ça comme une “copie active” de l’image. C’est dans ce conteneur que l’application tourne réellement. 
+				On peut démarrer, arrêter ou supprimer un conteneur très rapidement, ce qui rend les déploiements simples et rapides.
+			</li>
+			<li>
+				<strong>Isolation :</strong> chaque conteneur fonctionne dans son propre environnement isolé. 
+				Cela signifie qu’il possède ses propres fichiers, ses propres dépendances et ses propres configurations. 
+				Ainsi, deux applications peuvent utiliser des versions différentes d’un même outil sans entrer en conflit. 
+				Cela évite aussi de “casser” le système principal.
+			</li>
+			<li>
+				<strong>Portabilité :</strong> une fois l’image créée, elle peut être exécutée exactement de la même manière 
+				sur n’importe quel environnement : ordinateur personnel, serveur ou cloud. 
+				Docker garantit que l’application fonctionnera de façon identique, peu importe le système d’exploitation 
+				(Linux comme Debian ou Alpine, mais aussi Windows ou Mac via Docker). 
+				Cela facilite énormément le partage et le déploiement des applications.
+			</li>
+			<li>
+				<strong>Exemple concret :</strong> imaginons qu’un nouveau développeur arrive dans l’équipe avec un Mac, 
+				alors que les autres travaillent sur Windows ou Linux. Sans Docker, il devrait installer toutes les dépendances, 
+				gérer les versions, et pourrait rencontrer des erreurs différentes des autres. 
+				Avec Docker, il lui suffit de récupérer le projet et de lancer les conteneurs : 
+				l’environnement est déjà configuré exactement comme pour les autres développeurs. 
+				Résultat : il peut travailler immédiatement, sans problème de compatibilité.
+			</li>
+		</ul>
 	</div>
 
 	<div class="section">
