@@ -1,47 +1,30 @@
 #!/bin/bash
 
-echo "Initialisation de DebianFlix..."
+echo "Lecture du fichier /liens_videos.txt..."
 
-# On crée le dossier qui va accueillir les vidéos
-mkdir -p /var/www/html/videos
+# Ajout de || [ -n "$url" ] pour ne pas rater la dernière ligne
+while read -r url || [ -n "$url" ]; do
+    # On nettoie l'URL des éventuels caractères \r cachés
+    url=$(echo "$url" | tr -d '\r')
 
-echo "Téléchargement des vidéos en cours..."
-# On lit le fichier texte ligne par ligne
-while read -r url; do
-    # Si la ligne est vide, on passe
     [ -z "$url" ] && continue
-    echo "- Téléchargement de : $url"
-    # wget télécharge le fichier et le range dans le dossier videos/
-    wget -q --show-progress -P /var/www/html/videos/ "$url"
+    
+    echo "Tentative de téléchargement de : $url"
+    # On enlève le -q pour voir l'erreur réelle
+    wget --no-check-certificate -P /var/www/html/videos/ "$url"
 done < /liens_videos.txt
 
-echo "Génération du catalogue HTML..."
-FICHIER_HTML="/var/www/html/index.html"
-
-cat <<EOF > $FICHIER_HTML
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>DebianFlix</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>DebianFlix</h1>
-    <div class="catalogue">
-EOF
-
+echo "Fin du téléchargement, génération du JS..."
+# 2. Génération du fichier DATA pour le JavaScript
+echo "var videoList = [" > /var/www/html/videos.js
 for video in /var/www/html/videos/*.mp4; do
-    [ -e "$video" ] || continue 
-    nom_fichier=$(basename "$video")
-    
-    echo "        <div class='video-card'>" >> $FICHIER_HTML
-    echo "            <h3>$nom_fichier</h3>" >> $FICHIER_HTML
-    echo "            <video controls src='videos/$nom_fichier'></video>" >> $FICHIER_HTML
-    echo "        </div>" >> $FICHIER_HTML
+    [ -e "$video" ] || continue
+    nom=$(basename "$video")
+    echo "  \"$nom\"," >> /var/www/html/videos.js
 done
+echo "];" >> /var/www/html/videos.js
 
-echo "    </div></body></html>" >> $FICHIER_HTML
+echo "Données générées pour le JS."
 
-echo "Site prêt ! Allumage du serveur web..."
+# 3. Lancement de Nginx
 nginx -g "daemon off;"
