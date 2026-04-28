@@ -1,98 +1,173 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Soutenance SAE 2.03 - DebianFlix</title>
-	<style>
-		body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
-		header { background: #E50914; color: white; padding: 20px; text-align: center; border-radius: 8px; }
-		h1 { margin: 0; }
-		.section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-		code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
-		.command { background: #222; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
-	</style>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Soutenance SAE 2.03 - DebianFlix</title>
+		<style>
+			body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+			header { background: #E50914; color: white; padding: 20px; text-align: center; border-radius: 8px; }
+			h1 { margin: 0; }
+			.section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+			code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+			.command { background: #222; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
+		</style>
+	</head>
+	<body>
 
-	<header>
-		<h1>Projet SAE 2.03 : DebianFlix</h1>
-		<p>Déploiement d'un service réseau de Vidéo à la Demande via Docker</p>
-	</header>
+		<header>
+			<h1>Projet SAE 2.03 : DebianFlix</h1>
+			<p>Déploiement d'un service réseau de Vidéo à la Demande via Docker</p>
+		</header>
 
-	<div class="section">
-		<h2>L'Équipe</h2>
-		<ul>
-			<li><strong>Vom Hoevel Lubin</strong>   : </li>
-			<li><strong>Courtois   Rafael</strong>  : </li>
-			<li><strong>Pedersoli  Adam</strong>    : </li>
-			<li><strong>Bidaux     Esteban</strong> : </li>
-		</ul>
-	</div>
+		<div class="section">
+			<h2>L'Équipe</h2>
+			<ul>
+				<li><strong>Vom Hoevel Lubin</strong>   : </li>
+				<li><strong>Courtois   Rafael</strong>  : </li>
+				<li><strong>Pedersoli  Adam</strong>    : </li>
+				<li><strong>Bidaux     Esteban</strong> : </li>
+			</ul>
+		</div>
 
-	<div class="section">
-		<h2>Objectif & Contraintes</h2>
-		<p>Nous avons choisi le sujet <strong>Vidéo à la demande</strong>. Notre projet respecte les contraintes suivantes :</p>
-		<ul>
-			<li>Utilisation de l'image de base <code>debian:latest</code>.</li>
-			<li>Un seul service réseau déployé : un serveur Web <strong>Nginx</strong>.</li>
-			<li>Aucun outil multi-conteneurs (pas de docker-compose).</li>
-		</ul>
-	</div>
+		<div class="section">
+			<h2>Objectif & Contraintes</h2>
+			<p>Nous avons choisi le sujet <strong>Vidéo à la demande</strong>. Notre projet respecte les contraintes suivantes :</p>
+			<ul>
+				<li>Utilisation de l'image de base <code>debian:latest</code>.</li>
+				<li>Un seul service réseau déployé : un serveur Web <strong>Nginx</strong>.</li>
+				<li>Aucun outil multi-conteneurs (pas de docker-compose).</li>
+			</ul>
+		</div>
 
-	<div class="section">
-		<h2>Docker (Fonctionnement)</h2>
-		<p>Pour le projet nous avons utilisé <strong>Docker</strong>. Il fonctionne ainsi :</p>
+		<div class="section">
+			<h2>Architecture du projet</h2>
 
-		<ul>
-			<li>
-				<strong>Création de l’image :</strong> une image Docker est créée à partir d’un fichier appelé <em>Dockerfile</em>. 
-				Dans ce fichier, on décrit étape par étape comment construire l’environnement : par exemple le système de base 
-				(comme Debian ou Alpine), l’installation des dépendances, et l’ajout de notre application. 
-				Une fois construite, l’image est immuable (elle ne change plus) et peut être réutilisée autant de fois que nécessaire.
-			</li>
-			<li>
-				<strong>Lancement du conteneur :</strong> un conteneur est une instance d’une image Docker en cours d’exécution. 
-				On peut voir ça comme une “copie active” de l’image. C’est dans ce conteneur que l’application tourne réellement. 
-				On peut démarrer, arrêter ou supprimer un conteneur très rapidement, ce qui rend les déploiements simples et rapides.
-			</li>
-			<li>
-				<strong>Isolation :</strong> chaque conteneur fonctionne dans son propre environnement isolé. 
-				Cela signifie qu’il possède ses propres fichiers, ses propres dépendances et ses propres configurations. 
-				Ainsi, deux applications peuvent utiliser des versions différentes d’un même outil sans entrer en conflit. 
-				Cela évite aussi de “casser” le système principal.
-			</li>
-			<li>
-				<strong>Portabilité :</strong> une fois l’image créée, elle peut être exécutée exactement de la même manière 
-				sur n’importe quel environnement : ordinateur personnel, serveur ou cloud. 
-				Docker garantit que l’application fonctionnera de façon identique, peu importe le système d’exploitation 
-				(Linux comme Debian ou Alpine, mais aussi Windows ou Mac via Docker). 
-				Cela facilite énormément le partage et le déploiement des applications.
-			</li>
-			<li>
-				<strong>Exemple concret :</strong> imaginons qu’un nouveau développeur arrive dans l’équipe avec un Mac, 
-				alors que les autres travaillent sur Windows ou Linux. Sans Docker, il devrait installer toutes les dépendances, 
-				gérer les versions, et pourrait rencontrer des erreurs différentes des autres. 
-				Avec Docker, il lui suffit de récupérer le projet et de lancer les conteneurs : 
-				l’environnement est déjà configuré exactement comme pour les autres développeurs. 
-				Résultat : il peut travailler immédiatement, sans problème de compatibilité.
-			</li>
-		</ul>
-	</div>
+			<p>
+			Notre projet repose sur une architecture simple basée sur un seul conteneur Docker.
+			</p>
 
-	<div class="section">
-		<h2>Démonstration (Installation)</h2>
-		<p>Pour lancer notre service sur votre machine, exécutez les commandes suivantes :</p>
-		
-		<p>1. Construire l'image (Installation de Nginx et copie des médias) :</p>
-		<div class="command">docker build -t debianflix .</div>
-		
-		<p>2. Lancer le conteneur (Mappage du port 80 vers 8080) :</p>
-		<div class="command">docker run -d -p 8080:80 debianflix</div>
-		
-		<p>3. Accéder au service web : <strong>http://localhost:8080</strong></p>
-	</div>
+			<ul>
+				<li>Un client (navigateur web)</li>
+				<li>Un conteneur Docker</li>
+				<li>Un serveur web Nginx</li>
+				<li>Des fichiers vidéo servis en HTTP</li>
+			</ul>
 
+			<p>
+			Le client envoie une requête au serveur via un port exposé (8080), 
+			qui est redirigé vers le port 80 du conteneur Docker où Nginx est actif.
+			</p>
 
+			<p>
+			Cette architecture permet de simplifier le déploiement tout en respectant les contraintes du projet.
+			</p>
+		</div>
 
-</body>
+		<div class="section">
+			<h2>Docker (Fonctionnement)</h2>
+			<p>Pour le projet nous avons utilisé <strong>Docker</strong>. Il fonctionne ainsi :</p>
+
+			<ul>
+				<li>
+					<strong>Création de l’image :</strong> une image Docker est créée à partir d’un fichier appelé <em>Dockerfile</em>. 
+					Dans ce fichier, on décrit étape par étape comment construire l’environnement : par exemple le système de base 
+					(comme Debian ou Alpine), l’installation des dépendances, et l’ajout de notre application. 
+					Une fois construite, l’image est immuable (elle ne change plus) et peut être réutilisée autant de fois que nécessaire.
+				</li>
+				<li>
+					<strong>Lancement du conteneur :</strong> un conteneur est une instance d’une image Docker en cours d’exécution. 
+					On peut voir ça comme une “copie active” de l’image. C’est dans ce conteneur que l’application tourne réellement. 
+					On peut démarrer, arrêter ou supprimer un conteneur très rapidement, ce qui rend les déploiements simples et rapides.
+				</li>
+				<li>
+					<strong>Isolation :</strong> chaque conteneur fonctionne dans son propre environnement isolé. 
+					Cela signifie qu’il possède ses propres fichiers, ses propres dépendances et ses propres configurations. 
+					Ainsi, deux applications peuvent utiliser des versions différentes d’un même outil sans entrer en conflit. 
+					Cela évite aussi de “casser” le système principal.
+				</li>
+				<li>
+					<strong>Portabilité :</strong> une fois l’image créée, elle peut être exécutée exactement de la même manière 
+					sur n’importe quel environnement : ordinateur personnel, serveur ou cloud. 
+					Docker garantit que l’application fonctionnera de façon identique, peu importe le système d’exploitation 
+					(Linux comme Debian ou Alpine, mais aussi Windows ou Mac via Docker). 
+					Cela facilite énormément le partage et le déploiement des applications.
+				</li>
+				<li>
+					<strong>Exemple concret :</strong> imaginons qu’un nouveau développeur arrive dans l’équipe avec un Mac, 
+					alors que les autres travaillent sur Windows ou Linux. Sans Docker, il devrait installer toutes les dépendances, 
+					gérer les versions, et pourrait rencontrer des erreurs différentes des autres. 
+					Avec Docker, il lui suffit de récupérer le projet et de lancer les conteneurs : 
+					l’environnement est déjà configuré exactement comme pour les autres développeurs. 
+					Résultat : il peut travailler immédiatement, sans problème de compatibilité.
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<h2>Analyse du Dockerfile</h2>
+
+			<p>Voici le fichier utilisé pour construire notre image Docker :</p>
+
+			<div class="command">
+		FROM debian:latest
+		<br><br>
+		RUN apt-get update && apt-get install -y nginx wget \
+		<br>
+			&& rm -rf /var/lib/apt/lists/*
+		<br><br>
+		COPY liens_videos.txt /liens_videos.txt
+		<br>
+		COPY entrypoint.sh /<strong>entrypoint.sh</strong>
+		<br><br>
+		RUN chmod +x /<strong>entrypoint.sh</strong>
+		<br><br>
+		EXPOSE 80
+		<br><br>
+		CMD ["/<strong>entrypoint.sh</strong>"]
+			</div>
+
+			<p><strong>Explication :</strong></p>
+			<ul>
+				<li><strong>Debian</strong> : système de base léger et stable</li>
+				<li><strong>Nginx</strong> : serveur web pour servir les vidéos</li>
+				<li><strong>wget</strong> : permet de télécharger les vidéos automatiquement</li>
+				<li><strong>COPY</strong> : ajoute les fichiers nécessaires au conteneur</li>
+				<li><strong>EXPOSE 80</strong> : ouverture du port HTTP</li>
+				<li><strong>CMD</strong> : lance le script au démarrage</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<h2>Script de démarrage (entrypoint.sh)</h2>
+
+			<p>
+			Au lancement du conteneur, un script est exécuté automatiquement.
+			</p>
+
+			<ul>
+				<li>Lit une liste de liens vidéo</li>
+				<li>Télécharge les vidéos avec wget</li>
+				<li>Place les fichiers dans le dossier web de Nginx</li>
+				<li>Lance ensuite le serveur Nginx</li>
+			</ul>
+
+			<p>
+			Ce fonctionnement permet de rendre le conteneur dynamique :
+			les vidéos ne sont pas stockées dans l'image mais récupérées au lancement.
+			</p>
+		</div>
+
+		<div class="section">
+			<h2>Démonstration (Installation)</h2>
+			<p>Pour lancer notre service sur votre machine, exécutez les commandes suivantes :</p>
+			
+			<p>1. Construire l'image (Installation de Nginx et copie des médias) :</p>
+			<div class="command">docker build -t debianflix .</div>
+			
+			<p>2. Lancer le conteneur (Mappage du port 80 vers 8080) :</p>
+			<div class="command">docker run -d -p 8080:80 debianflix</div>
+			
+			<p>3. Accéder au service web : <strong>http://localhost:8080</strong></p>
+		</div>
+	</body>
 </html>
