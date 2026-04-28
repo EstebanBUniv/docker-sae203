@@ -49,8 +49,6 @@ function initLikes() {
         const countSpan = card.querySelector('.like-count');
         const btn = card.querySelector('.like-btn');
 
-        setLikes(videoName, 0);
-
         // état initial
         let liked = false;
         let current = getLikes(videoName);
