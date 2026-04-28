@@ -2,38 +2,76 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Démarrage du script DebianFlix...");
     const container = document.getElementById('catalogue');
 
-    // 1. Vérification si la variable existe
+    // 1. Vérification vidéo list
     if (typeof videoList === 'undefined') {
-        console.error("ERREUR : La variable videoList n'existe pas. Le fichier videos.js est-il chargé ?");
-        container.innerHTML = "<p style='color:red;'>Erreur de chargement des données (videos.js introuvable).</p>";
+        console.error("ERREUR : videoList introuvable (videos.js manquant)");
+        container.innerHTML = "<p style='color:red;'>Erreur de chargement des vidéos.</p>";
         return;
     }
 
-    console.log("Vidéos détectées :", videoList);
-
-    // 2. Vérification si la liste est vide
     if (videoList.length === 0) {
-        container.innerHTML = "<p>Aucune vidéo trouvée dans le dossier /videos/.</p>";
+        container.innerHTML = "<p>Aucune vidéo trouvée.</p>";
         return;
     }
 
-    // 3. Génération propre du HTML
+    // 2. Génération HTML
     let htmlContent = "";
+
     videoList.forEach(video => {
-        // On retire les virgules ou espaces traînants si le Bash a mal formaté
         const cleanName = video.trim();
-        if (cleanName === "") return;
+        if (!cleanName) return;
 
         htmlContent += `
-            <div class="video-card">
+            <div class="video-card" data-video="${cleanName}">
                 <h3>${cleanName}</h3>
+
                 <video controls>
                     <source src="videos/${cleanName}" type="video/mp4">
                     Votre navigateur ne supporte pas la lecture de vidéos.
                 </video>
+
+                <div class="like-section">
+                    <button class="like-btn">👍 Like</button>
+                    <span class="like-count">0</span>
+                </div>
             </div>
         `;
     });
 
     container.innerHTML = htmlContent;
+
+    // 3. Init système likes
+    initLikes();
 });
+
+
+// ======================
+// 🔥 LIKES SYSTEM
+// ======================
+
+function initLikes() {
+    document.querySelectorAll('.video-card').forEach(card => {
+        const videoName = card.dataset.video;
+        const countSpan = card.querySelector('.like-count');
+        const btn = card.querySelector('.like-btn');
+
+        // afficher likes sauvegardés
+        countSpan.textContent = getLikes(videoName);
+
+        btn.addEventListener('click', () => {
+            let current = getLikes(videoName);
+            current++;
+
+            setLikes(videoName, current);
+            countSpan.textContent = current;
+        });
+    });
+}
+
+function getLikes(videoName) {
+    return parseInt(localStorage.getItem("like_" + videoName)) || 0;
+}
+
+function setLikes(videoName, value) {
+    localStorage.setItem("like_" + videoName, value);
+}
