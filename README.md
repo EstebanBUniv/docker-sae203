@@ -11,7 +11,7 @@ Ouvrez un terminal dans ce dossier et tapez :
 
 **2. Lancer le conteneur :**
 Démarrez le service en mappant le port 80 du conteneur sur le port 8080 de votre machine :
-`docker run -d -p 8080:80 debianflix`
+`docker run -d -p 8080:80 --name serveur_vod debianflix`
 
 **3. Profiter du service :**
 Ouvrez votre navigateur web et allez sur : [http://localhost:8080](http://localhost:8080)
