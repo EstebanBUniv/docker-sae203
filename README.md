@@ -29,7 +29,22 @@ docker build -t debianflix .
 docker run -d -p 8080:80 --name serveur_vod debianflix
 ```
 
-**4. Profiter du service :**
-Ouvrez votre navigateur web et allez sur : 
-- Si vous etes sur un pc de l'IUT : [http://di-docker:8080/](http://di-docker:8080/)
-- Sinon                           : [http://localhost:8080/](http://localhost:8080/)
+
+**4. Profiter du service :**  
+Ouvrez votre navigateur web et allez sur :  
+- Si vous êtes sur un PC de l'IUT : [http://di-docker:8080/](http://di-docker:8080/)  
+- Sinon : [http://localhost:8080/](http://localhost:8080/)
+
+
+## Fonctionnalités  
+Le site permet la visualisation de vidéos préalablement définies dans le fichier `liens_videos.txt`.
+
+
+## Structure du projet
+```
+- docker-sae203
+    ├── Dockerfile
+    ├── README.md
+    ├── entrypoint.sh
+    └── liens_videos.txt
+```
