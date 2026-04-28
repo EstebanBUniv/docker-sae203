@@ -28,7 +28,7 @@ docker build -t debianflix .
 ```bash
 docker run -d -p 8080:80 --name serveur_vod debianflix
 ```
-Si une erreur apparaît faire :
+Si le site a déjà été créer faire :
 ```bash
 docker rm -f serveur_vod
 ```
@@ -45,9 +45,14 @@ Le site permet la visualisation de vidéos préalablement définies dans le fich
 
 ## Structure du projet
 ```
-- docker-sae203
-    ├── Dockerfile
-    ├── README.md
-    ├── entrypoint.sh
-    └── liens_videos.txt
+docker-sae203/
+├── Dockerfile
+├── README.md
+├── entrypoint.sh
+├── liens_videos.txt
+├── videos/           <-- Dossier contenant les fichiers mp4
+└── web/            
+    ├── index.html
+    ├── script.js
+    └── style.css
 ```
