@@ -30,4 +30,6 @@ docker run -d -p 8080:80 --name serveur_vod debianflix
 ```
 
 **4. Profiter du service :**
-Ouvrez votre navigateur web et allez sur : [http://di-docker:8080/](http://di-docker:8080/)
+Ouvrez votre navigateur web et allez sur : 
+Si vous etes sur un pc de l'IUT : [http://di-docker:8080/](http://di-docker:8080/)
+Sinon                           : [http://localhost:8080/](http://localhost:8080/)
