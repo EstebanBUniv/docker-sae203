@@ -81,3 +81,4 @@ function getLikes(videoName) {
 function setLikes(videoName, value) {
     localStorage.setItem("like_" + videoName, value);
 }
+
