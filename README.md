@@ -28,11 +28,14 @@ docker build -t debianflix .
 ```bash
 docker run -d -p 8080:80 --name serveur_vod debianflix
 ```
+Si une erreur apparaît faire :
+```bash
+docker rm -f serveur_vod
+```
 
-
-**4. Profiter du service :**  
-Ouvrez votre navigateur web et allez sur :  
-- Si vous êtes sur un PC de l'IUT : [http://di-docker:8080/](http://di-docker:8080/)  
+**4. Profiter du service :**
+Ouvrez votre navigateur web et allez sur :
+- Si vous êtes sur un PC de l'IUT : [http://di-docker:8080/](http://di-docker:8080/)
 - Sinon : [http://localhost:8080/](http://localhost:8080/)
 
 
