@@ -112,20 +112,22 @@
 
 			<div class="command">
 				FROM debian:latest
+                <br><br>
+                RUN apt-get update && apt-get install -y nginx wget
+                <br><br>
+                # On copie nos fichiers statiques
+	            <br>			
+                COPY web/index.html /var/www/html/index.html<br>
+                COPY web/script.js /var/www/html/script.js<br>
+                COPY web/style.css /var/www/html/style.css<br>
+                COPY liens_videos.txt /liens_videos.txt<br>
+                COPY entrypoint.sh /entrypoint.sh<br>
+                COPY videos/*.mp4 /var/www/html/videos/<br>
 				<br><br>
-				RUN apt-get update && apt-get install -y nginx wget \
-				<br>
-					&& rm -rf /var/lib/apt/lists/*
+                RUN chmod +x /entrypoint.sh
 				<br><br>
-				COPY liens_videos.txt /liens_videos.txt
-				<br>
-				COPY entrypoint.sh /<strong>entrypoint.sh</strong>
-				<br><br>
-				RUN chmod +x /<strong>entrypoint.sh</strong>
-				<br><br>
-				EXPOSE 80
-				<br><br>
-				CMD ["/<strong>entrypoint.sh</strong>"]
+                EXPOSE 80<br>
+                ENTRYPOINT ["/entrypoint.sh"]
 			</div>
 
 			<p><strong>Explication :</strong></p>
